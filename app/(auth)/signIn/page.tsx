@@ -17,7 +17,7 @@ export default function page() {
           </CardDescription>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="flex flex-col gap-4">
           <Button className="w-full" variant={"outline"}>
             <GithubIcon className="size-4"/>
             sign in with GitHb
@@ -32,6 +32,7 @@ export default function page() {
               <Label htmlFor="email">Email</Label>
               <Input type="email" placeholder="abc@example.com" />
             </div>
+            <Button>Continue with Email</Button>
           </div>
         </CardContent>
       </Card>

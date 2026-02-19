@@ -1,9 +1,18 @@
-import { Button } from "@/components/ui/button";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function page() {
   return (
     <div>
-      <Button>signIn</Button>
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            signIn
+          </CardTitle>
+          <CardDescription>
+            login in with github
+          </CardDescription>
+        </CardHeader>
+      </Card>
     </div>
   )
 }

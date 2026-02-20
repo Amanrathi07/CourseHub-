@@ -23,9 +23,9 @@ export default function AuthLayout({children}:props) {
             corseLLM
           </Link>
             {children}
-            <div>
-              By clicking continue, you agree to our <span>Term of services</span>{" "} 
-              and  <span>Privacy Policy</span>
+            <div className="text-balance text-center text-xs text-muted-foreground">
+              By clicking continue, you agree to our <span className="hover:text-primary hover:underline cursor-pointer">Term of services</span>{" "} 
+              and  <span className="hover:text-primary hover:underline cursor-pointer">Privacy Policy</span>
             </div>
         </div>
     </div>

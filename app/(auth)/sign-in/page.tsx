@@ -1,10 +1,30 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { authClient } from "@/lib/auth-client";
 import { GithubIcon } from "lucide-react";
+import { toast } from "sonner";
 
 export default function page() {
+
+  async function signInWithGithhub() {
+    await authClient.signIn.social({
+      provider:"google",
+      callbackURL:"/" ,
+      
+    },{
+         onSuccess:()=>{
+        toast.success("working")
+      },
+      onError:(err)=>{
+        toast.error(err.error.message)
+      } ,
+      
+      })
+  }
+
   return (
     <div>
       <Card>
@@ -18,7 +38,7 @@ export default function page() {
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          <Button className="w-full" variant={"outline"}>
+          <Button onClick={signInWithGithhub} className="w-full" variant={"outline"}>
             <GithubIcon className="size-4"/>
             sign in with GitHb
           </Button>

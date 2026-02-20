@@ -19,10 +19,14 @@ export default function AuthLayout({children}:props) {
       </Link>
         <div className="flex w-full max-w-sm flex-col gap-6">
           <Link href="/" className="flex items-center gap-2 self-center font-medium">
-            <Image src={""} alt="Logo" />
+            {/* <Image src={""} alt="Logo" /> */}
             corseLLM
           </Link>
             {children}
+            <div>
+              By clicking continue, you agree to our <span>Term of services</span>{" "} 
+              and  <span>Privacy Policy</span>
+            </div>
         </div>
     </div>
   )

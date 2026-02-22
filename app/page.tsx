@@ -7,9 +7,16 @@ export default async function Home() {
 })
   console.log(session?.user.name)
   return (  
-    <div className="">
+    <>
      <ModeToggle />
-     
+      <div className="w-screen h-screen flex flex-col items-center justify-center gap-8">
+     <div className="flex flex-col ">
+        <span>name: {session?.user.name}</span>
+        <span>email: {session?.user.email}</span>
+        <span>emailVerified: {session?.user.emailVerified}</span>
+        <span>id: {session?.user.id}</span>
+     </div>
     </div>
+    </>
   );
 }

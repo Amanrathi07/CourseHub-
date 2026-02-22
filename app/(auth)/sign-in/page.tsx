@@ -20,10 +20,10 @@ export default function page() {
       
     },{
          onSuccess:()=>{
-        toast.success("login with github")
+        toast.success("Sign in with Github , you will be redirected...")
       },
       onError:(err)=>{
-        toast.error(err.error.message)
+        toast.error(err.error.message||"Internal Server Error")
       } ,
       
       })

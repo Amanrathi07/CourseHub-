@@ -4,25 +4,30 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
-import { GithubIcon } from "lucide-react";
+import { GithubIcon, Loader2Icon } from "lucide-react";
+import { useTransition } from "react";
 import { toast } from "sonner";
 
 export default function page() {
 
+  const [githubPending, startGithubTransition] = useTransition()
+
   async function signInWithGithhub() {
-    await authClient.signIn.social({
+    startGithubTransition(async ()=>{
+      await authClient.signIn.social({
       provider:"google",
       callbackURL:"/" ,
       
     },{
          onSuccess:()=>{
-        toast.success("working")
+        toast.success("login with github")
       },
       onError:(err)=>{
         toast.error(err.error.message)
       } ,
       
       })
+    })
   }
 
   return (
@@ -38,9 +43,16 @@ export default function page() {
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          <Button onClick={signInWithGithhub} className="w-full" variant={"outline"}>
-            <GithubIcon className="size-4"/>
-            sign in with GitHb
+          <Button disabled={githubPending} onClick={signInWithGithhub} className="w-full" variant={"outline"}>
+            {githubPending?(<>
+              <Loader2Icon className="size-4 animate-spin"/>
+              <span>Loading...</span>
+            </>):
+              (<>
+                <GithubIcon className="size-4"/>
+                sign in with GitHb
+              </>)
+            }
           </Button>
 
           <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">

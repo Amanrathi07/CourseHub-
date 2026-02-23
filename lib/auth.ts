@@ -4,6 +4,8 @@ import { PrismaClient } from "./generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { env } from "@/lib/env";
 
+import { emailOTP } from "better-auth/plugins"
+
 const adapter = new PrismaPg({connectionString:env.DATABASE_URL});
 
 const prisma = new PrismaClient({adapter});
@@ -19,10 +21,20 @@ export const auth = betterAuth({
         google: { 
             clientId: env.GOOGLE_CLIENT_ID, 
             clientSecret: env.GOOGLE_CLIENT_SECRET, 
-        }, 
-         github: { 
-            clientId: env.GITHUB_CLIENT_ID, 
-            clientSecret: env.GITHUB_CLIENT_SECRET, 
-        }, 
+        }
     },
+
+    plugins:[
+        emailOTP({
+            async sendVerificationOTP({ email, otp, type }) { 
+                if (type === "sign-in") { 
+                    // Send the OTP for sign in
+                } else if (type === "email-verification") { 
+                    // Send the OTP for email verification
+                } else { 
+                    // Send the OTP for password reset
+                } 
+            }, 
+        })
+    ]
 });

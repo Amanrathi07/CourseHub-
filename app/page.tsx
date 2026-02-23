@@ -1,6 +1,8 @@
 import { ModeToggle } from "@/components/ModeToggle";
+import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
 import { getServerSession } from "@/lib/getServerSession.ts";
+import { Logout } from "@/modules/ui/Logout";
 import { headers } from "next/headers";
 export default async function Home() {
   const session = await getServerSession();
@@ -15,6 +17,7 @@ export default async function Home() {
         <span>emailVerified: {session?.user.emailVerified}</span>
         <span>id: {session?.user.id}</span>
      </div>
+     <Logout />
     </div>
     </>
   );

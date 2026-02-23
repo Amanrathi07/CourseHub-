@@ -4,7 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
-import { GithubIcon, Loader2Icon } from "lucide-react";
+import { Loader2Icon } from "lucide-react";
+import { IoLogoGoogle } from "react-icons/io";
 import { useTransition } from "react";
 import { toast } from "sonner";
 
@@ -13,7 +14,7 @@ export default function SignInPage() {
   
   const [githubPending, startGithubTransition] = useTransition()
 
-  async function signInWithGithhub() {
+  async function signInWithGoogle() {
     startGithubTransition(async ()=>{
       await authClient.signIn.social({
       provider:"google",
@@ -21,7 +22,7 @@ export default function SignInPage() {
       
     },{
          onSuccess:()=>{
-        toast.success("Sign in with Github , you will be redirected...")
+        toast.success("Sign in with Google , you will be redirected...")
       },
       onError:(err)=>{
         toast.error(err.error.message||"Internal Server Error")
@@ -44,14 +45,14 @@ export default function SignInPage() {
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          <Button disabled={githubPending} onClick={signInWithGithhub} className="w-full" variant={"outline"}>
+          <Button disabled={githubPending} onClick={signInWithGoogle} className="w-full" variant={"outline"}>
             {githubPending?(<>
               <Loader2Icon className="size-4 animate-spin"/>
               <span>Loading...</span>
             </>):
               (<>
-                <GithubIcon className="size-4"/>
-                sign in with GitHb
+                <IoLogoGoogle className="size-4"/>
+                sign in with Google
               </>)
             }
           </Button>

@@ -1,24 +1,23 @@
 import { ModeToggle } from "@/components/ModeToggle";
-import { Button } from "@/components/ui/button";
-import { auth } from "@/lib/auth";
+import { buttonVariants } from "@/components/ui/button";
 import { getServerSession } from "@/lib/getServerSession.ts";
-import { Logout } from "@/modules/ui/Logout";
-import { headers } from "next/headers";
+import DashBoard from "@/modules/DashBoard";
+import Link from "next/link";
 export default async function Home() {
   const session = await getServerSession();
-  console.log(session?.user.name)
-  return (  
-    <>
-     <ModeToggle />
-      <div className="w-screen h-screen flex flex-col items-center justify-center gap-8">
-     <div className="flex flex-col ">
-        <span>name: {session?.user.name}</span>
-        <span>email: {session?.user.email}</span>
-        <span>emailVerified: {session?.user.emailVerified}</span>
-        <span>id: {session?.user.id}</span>
-     </div>
-     <Logout />
-    </div>
-    </>
-  );
-}
+
+    if(!session) {
+      return (
+         <>
+         <ModeToggle />
+          <div className="w-dvw h-dvh flex items-center justify-center">
+        <Link className={buttonVariants({
+          variant:"default" ,
+        })} href={"/sign-in"}>sign in</Link>
+        </div>
+         </>
+      )
+    }
+
+    return <DashBoard session={session} />
+  }

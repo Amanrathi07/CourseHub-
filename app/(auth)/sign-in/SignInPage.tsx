@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,9 +8,12 @@ import { Loader2Icon } from "lucide-react";
 import { IoLogoGoogle } from "react-icons/io";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 
 export default function SignInPage() {
+
+  const router = useRouter()
 
   const [email,setEmail] = useState('')
 
@@ -36,8 +39,30 @@ export default function SignInPage() {
   }
 
   async function signInwithEmail() {
-    startEmailTransition(()=>{
+    startEmailTransition(async()=>{
+      await authClient.emailOtp.sendVerificationOtp({
+        email,
+        type:"sign-in",
+      },{
+        onSuccess:()=>{
+          toast.promise<{ name: string }>(
+            () =>
+              new Promise((resolve) =>
+                setTimeout(() => resolve({ name: "Email" }), 2000)
+              ),
+            {
+              loading: "Loading...",
+              success: (data) => `${data.name} has been send , pls check you inbox`,
+              error: "Error",
+            }
+          )
 
+          router.push("/email-Verification")
+        },
+        onError:(err)=>{
+          toast.error(err.error.message||"internal server error")
+        }
+      })
     })
   }
 
@@ -73,9 +98,13 @@ export default function SignInPage() {
           <div className="grid gap-3">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
-              <Input type="email" placeholder="abc@example.com" />
+              <Input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="abc@example.com" required />
             </div>
-            <Button>Continue with Email</Button>
+            {emailPending ?(<div className={buttonVariants()}>
+                <Loader2Icon className="size-4 animate-spin" />
+              pls wait ...
+            </div>):(
+              <Button  onClick={signInwithEmail}>Continue with Email</Button>)}
           </div>
         </CardContent>
       </Card>

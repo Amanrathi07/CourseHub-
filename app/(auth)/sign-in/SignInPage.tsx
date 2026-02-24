@@ -60,7 +60,7 @@ export default function SignInPage() {
           router.push("/email-Verification")
         },
         onError:(err)=>{
-          toast.error(err.error.message||"internal server error")
+          toast.error(err.error.message||"Internal Server Error")
         }
       })
     })

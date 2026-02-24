@@ -5,6 +5,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { env } from "@/lib/env";
 
 import { emailOTP } from "better-auth/plugins"
+import { transporter } from "@/nodeMailer/sendMail";
 
 const adapter = new PrismaPg({connectionString:env.DATABASE_URL});
 
@@ -28,11 +29,29 @@ export const auth = betterAuth({
         emailOTP({
             async sendVerificationOTP({ email, otp, type }) { 
                 if (type === "sign-in") { 
-                    // Send the OTP for sign in
+                    await transporter.sendMail({
+                        from: '"course-Hub"',
+                        to: email,
+                        subject: type,
+                        text: "otp is ", 
+                        html: `<b>${otp}</b>`,
+                      });
                 } else if (type === "email-verification") { 
-                    // Send the OTP for email verification
+                    await transporter.sendMail({
+                        from: '"course-Hub"',
+                        to: email,
+                        subject: type,
+                        text: "otp is ", 
+                        html: `<b>${otp}</b>`,
+                      });
                 } else { 
-                    // Send the OTP for password reset
+                    await transporter.sendMail({
+                        from: '"course-Hub"',
+                        to: email,
+                        subject: type,
+                        text: "otp is ", 
+                        html: `<b>${otp}</b>`,
+                      });
                 } 
             }, 
         })

@@ -6,13 +6,16 @@ import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
 import { Loader2Icon } from "lucide-react";
 import { IoLogoGoogle } from "react-icons/io";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { toast } from "sonner";
 
 
 export default function SignInPage() {
-  
+
+  const [email,setEmail] = useState('')
+
   const [githubPending, startGithubTransition] = useTransition()
+  const [emailPending,startEmailTransition] = useTransition()
 
   async function signInWithGoogle() {
     startGithubTransition(async ()=>{
@@ -29,6 +32,12 @@ export default function SignInPage() {
       } ,
       
       })
+    })
+  }
+
+  async function signInwithEmail() {
+    startEmailTransition(()=>{
+
     })
   }
 

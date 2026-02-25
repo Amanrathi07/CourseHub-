@@ -13,10 +13,11 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useState } from "react";
 
 export default function page() {
-  const [otp,setOtp] = useState<number>()
+  const [otp,setOtp] = useState('')
   return (
     <Card className="w-full mx-auto">
       <CardHeader className="text-center">
@@ -28,7 +29,7 @@ export default function page() {
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="flex flex-col items-center space-y-2">
-          <InputOTP maxLength={6} className="gap-2" value={otp} onChange={(value)=>setOtp(value)}>
+          <InputOTP  maxLength={6} className="gap-2" pattern={REGEXP_ONLY_DIGITS} value={otp} onChange={(value)=>setOtp(value)}>
           <InputOTPGroup>
             <InputOTPSlot index={0} />
             <InputOTPSlot index={1} />

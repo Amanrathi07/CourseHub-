@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,14 +10,42 @@ import {
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { authClient } from "@/lib/auth-client";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { useState } from "react";
+import { Loader2Icon } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useTransition } from "react";
+import { toast } from "sonner";
 
 export default function page() {
+  const router = useRouter() ;
   const [otp,setOtp] = useState('')
+  const [pending , startTransition] = useTransition()
+
+  const isOtpComleated = otp.length === 6 ;
+
+  const params = useSearchParams() ;
+  const email = params.get("email") as string  ;
+
+  function verifyOtp(){
+    startTransition(async()=>{
+      await authClient.signIn.emailOtp({
+        email,
+        otp,
+      },{
+        onSuccess:()=>{
+          toast.success("Email Verified") 
+          router.push("/")
+        },
+        onError:(error)=>{
+          toast.error(error.error.message||"Error While Verifiing OTP")
+        }
+
+      })
+    })
+  }
   return (
     <Card className="w-full mx-auto">
       <CardHeader className="text-center">
@@ -37,12 +65,18 @@ export default function page() {
             <InputOTPSlot index={3} />
             <InputOTPSlot index={4} />
             <InputOTPSlot index={5} />
-            <InputOTPSlot index={6} />
           </InputOTPGroup>
         </InputOTP>
           <p className="text-sm text-muted-foreground">Enter the 6-digit code sent to your email</p>
         </div>
-        <Button className="w-full">Verify Accoutn</Button>
+
+        <Button  disabled={pending || !isOtpComleated} onClick={verifyOtp} className="w-full">
+          {pending?(
+          <><Loader2Icon className="size-4 animate-spin" />loading...</>
+        ):(
+          <>Verify Accoutn</>
+        )}
+        </Button>
       </CardContent>
     </Card>
   );

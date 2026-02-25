@@ -57,7 +57,7 @@ export default function SignInPage() {
             }
           )
 
-          router.push("/verify-request")
+          router.push(`/verify-request?email=${email}`)
         },
         onError:(err)=>{
           toast.error(err.error.message||"Internal Server Error")
@@ -100,11 +100,14 @@ export default function SignInPage() {
               <Label htmlFor="email">Email</Label>
               <Input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="abc@example.com" required />
             </div>
-            {emailPending ?(<div className={buttonVariants()}>
+
+            <Button disabled={emailPending} onClick={signInwithEmail}>
+              {emailPending ?(<>
                 <Loader2Icon className="size-4 animate-spin" />
               pls wait ...
-            </div>):(
-              <Button  onClick={signInwithEmail}><Send className="size-4"/>Continue with Email</Button>)}
+            </>):(
+              <><Send className="size-4"/>Continue with Email</>)}
+            </Button>
           </div>
         </CardContent>
       </Card>

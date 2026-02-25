@@ -19,7 +19,6 @@ export const sendEmail = async ( email:string, otp:string, type:string ) => {
     from: '"course-Hub"',
     to: email,
     subject: type,
-    text: "otp is ",
-    html: `<b>${otp}</b>`,
+    html: `Your OTP is <b>${otp}</b>`,
   });
 };

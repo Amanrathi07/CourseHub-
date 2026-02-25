@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
-import { Loader2Icon } from "lucide-react";
+import { Loader2Icon, Send } from "lucide-react";
 import { IoLogoGoogle } from "react-icons/io";
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
@@ -57,7 +57,7 @@ export default function SignInPage() {
             }
           )
 
-          router.push("/email-Verification")
+          router.push("/verify-request")
         },
         onError:(err)=>{
           toast.error(err.error.message||"Internal Server Error")
@@ -104,7 +104,7 @@ export default function SignInPage() {
                 <Loader2Icon className="size-4 animate-spin" />
               pls wait ...
             </div>):(
-              <Button  onClick={signInwithEmail}>Continue with Email</Button>)}
+              <Button  onClick={signInwithEmail}><Send className="size-4"/>Continue with Email</Button>)}
           </div>
         </CardContent>
       </Card>

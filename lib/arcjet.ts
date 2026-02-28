@@ -18,15 +18,23 @@ export{
   slidingWindow,
 }
 
-export default arcjet({
-    key:env.ARCJET_KEY ,
+export const aj = arcjet({
+  key: env.ARCJET_KEY!,
+  rules: [
+    // Shield WAF — blocks common web attacks (SQLi, XSS, etc.)
+    shield({ mode: "LIVE" }),
 
-    characteristics:["fingerprint"] ,
+    // Rate limit login/signup attempts: 10 requests per 60s per IP
+    slidingWindow({
+      mode: "LIVE",
+      interval: "60s",
+      max: 10,
+    }),
 
-    // define base rules here, can also be empty if you don't want to have any base rules
-    rules:[
-        shield({
-            mode:"LIVE"
-        })
-    ]
-})
+    // Block bots from hitting auth endpoints
+    detectBot({
+      mode: "LIVE",
+      allow: [], // block all bots — no exceptions on auth routes
+    }),
+  ],
+});

@@ -1,9 +1,43 @@
 import { ModeToggle } from "@/components/ModeToggle";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
+import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getServerSession } from "@/lib/getServerSession.ts";
 import DashBoard from "@/modules/DashBoard";
 import Link from "next/link";
+
+
+interface featuresProps{
+    title:string ;
+    description:string ;
+    icon:string
+}
+
+const features:featuresProps[] = [
+    {
+        title:"Comprehesive Courses",
+        description:"Access a wide range of carefully curated courses designed by industry experts.",
+        icon:"📚"
+    },
+    {
+        title:"interactive Learning",
+        description:"Engage with interactive content , quizzes , and assignments to enhance your learning experience",
+        icon:"🎮"
+    },
+    {
+        title:"Progress Tracking",
+        description:"Monitor your progress and achievements with detailes analytics and personalized dashboard.",
+        icon:"📊"
+    },
+    {
+        title:"Community support",
+        description:"Join a vibrant community of learners and instructors to collaborate and share knowledge",
+        icon:"👥"
+    }
+
+]
+
+
 export default async function Home() {
   const session = await getServerSession();
 
@@ -20,9 +54,29 @@ export default async function Home() {
                       <Link className={buttonVariants({
                         size:"lg"
                       })} href="/courses">Explore Courses</Link>
+                      <Link className={buttonVariants({
+                        size:"lg" ,
+                        variant:"outline"
+                      })} href="/sign-in">Sign in</Link>
                     </div>
                 </div>
                 
+            </section>
+
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {
+                    features.map((feature,index)=>(
+                        <Card key={index} className="hover:shadow-lg transition-shadow">
+                            <CardHeader>
+                                <div className="text-4xl mb-4">{feature.icon}</div>
+                                <CardTitle>{feature.title}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-muted-foreground">{feature.description}</p>
+                            </CardContent>
+                        </Card>
+                    ))
+                }
             </section>
         </>
       )

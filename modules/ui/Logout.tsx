@@ -13,6 +13,7 @@ export  function Logout() {
             onSuccess:()=>{
                 toast.success("Logout Successfull ")
                 router.push("/sign-in");
+                router.refresh()
             },
             onError:(error)=>{
                 toast.error(error.error.message||"Internal Server Error")

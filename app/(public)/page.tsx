@@ -1,9 +1,6 @@
-import { ModeToggle } from "@/components/ModeToggle";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { getServerSession } from "@/lib/getServerSession.ts";
-import DashBoard from "@/modules/DashBoard";
+import { Card,  CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 
@@ -38,11 +35,9 @@ const features:featuresProps[] = [
 ]
 
 
-export default async function Home() {
-  const session = await getServerSession();
+export default  function Home() {
 
-    if(!session) {
-      return (
+    return (
         <>
             <section className="relative py-20">
                 <div className="flex flex-col items-center text-center space-y-8">
@@ -63,7 +58,7 @@ export default async function Home() {
                 
             </section>
 
-            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
                 {
                     features.map((feature,index)=>(
                         <Card key={index} className="hover:shadow-lg transition-shadow">
@@ -80,7 +75,5 @@ export default async function Home() {
             </section>
         </>
       )
-    }
-
-    return <DashBoard session={session} />
+  
   }

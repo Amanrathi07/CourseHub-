@@ -1,9 +1,9 @@
 import {
   ChevronDownIcon,
-  User,
-  CreditCard,
-  Settings,
   LogOut,
+  Home,
+  BookOpenIcon,
+  LayoutDashboard,
 } from "lucide-react"
 
 import {
@@ -22,8 +22,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Logout } from "@/modules/ui/Logout"
+import Link from "next/link"
 
-export function UserDropdown({user:{name,email}}) {
+interface props{
+  user:{
+    name:string ;
+    email:string ;
+  }
+}
+
+export function UserDropdown({user:{name,email}}:props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -68,20 +76,28 @@ export function UserDropdown({user:{name,email}}) {
             My Account
           </DropdownMenuLabel>
 
-          <DropdownMenuItem className="cursor-pointer rounded-lg px-2 py-2 text-sm">
-            <User className="mr-2 h-4 w-4" />
-            Profile
+          <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-2 py-2 text-sm">
+            <Link href="/">
+              <Home className="mr-2 h-4 w-4" />
+              Home
+            </Link>
           </DropdownMenuItem>
 
-          <DropdownMenuItem className="cursor-pointer rounded-lg px-2 py-2 text-sm">
-            <CreditCard className="mr-2 h-4 w-4" />
-            Billing
+          <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-2 py-2 text-sm">
+            <Link href="/courses">
+              <BookOpenIcon className="mr-2 h-4 w-4" />
+              Courses
+            </Link>
           </DropdownMenuItem>
 
-          <DropdownMenuItem className="cursor-pointer rounded-lg px-2 py-2 text-sm">
-            <Settings className="mr-2 h-4 w-4" />
-            Settings
+          <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-2 py-2 text-sm">
+            <Link href="/dashboard">
+              <LayoutDashboard className="mr-2 h-4 w-4" />
+              Dashboard
+            </Link>
           </DropdownMenuItem>
+
+
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />

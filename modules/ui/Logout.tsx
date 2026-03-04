@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -23,13 +22,13 @@ export function Logout() {
 
   return (
     <div>
-      <Button
+      <button
         className="cursor-pointer rounded-lg px-2 py-2 text-sm text-red-500 hover:text-red-500"
         onClick={logout}
-        variant={"ghost"}
+       
       >
         logout
-      </Button>
+      </button>
     </div>
   );
 }

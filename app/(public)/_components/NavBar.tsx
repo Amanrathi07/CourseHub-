@@ -4,6 +4,7 @@ import Link from "next/link";
 import globe from"@/public/globe.svg"
 import { getServerSession } from "@/lib/getServerSession.ts";
 import { buttonVariants } from "@/components/ui/button";
+import { UserDropdown } from "./UserDropdown";
 
 interface navItemProps{
     name:string ;
@@ -39,7 +40,7 @@ export default async function NavBar() {
                 <div className="flex items-center space-x-4">
                     <ModeToggle />
                     {
-                        session?("Logged in "):(
+                        session?(<UserDropdown user={session.user}/>):(
                             <>
                                 <Link href={"/sign-in"} className={buttonVariants({
                                     variant:"secondary"

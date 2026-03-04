@@ -10,7 +10,7 @@ export function Logout() {
       fetchOptions: {
         onSuccess: () => {
           toast.success("Logout Successfull ");
-          router.push("/sign-in");
+          router.push("/");
           router.refresh();
         },
         onError: (error) => {

@@ -4,6 +4,9 @@ import {
   Home,
   BookOpenIcon,
   LayoutDashboard,
+  User,
+  User2Icon,
+  User2,
 } from "lucide-react"
 
 import {
@@ -28,10 +31,11 @@ interface props{
   user:{
     name:string ;
     email:string ;
+    image:string ;
   }
 }
 
-export function UserDropdown({user:{name,email}}:props) {
+export function UserDropdown({user:{name,email,image}}:props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -39,8 +43,8 @@ export function UserDropdown({user:{name,email}}:props) {
           className="flex items-center gap-2 rounded-full px-2 py-1 transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Avatar className="h-8 w-8">
-            <AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
-            <AvatarFallback>KK</AvatarFallback>
+            {image ? (<AvatarImage alt="Profile image" src={image} />):(<><AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
+            <AvatarFallback><User /></AvatarFallback></>)}
           </Avatar>
           <ChevronDownIcon
             aria-hidden="true"
@@ -58,8 +62,8 @@ export function UserDropdown({user:{name,email}}:props) {
         {/* User Info Section */}
         <div className="flex items-center gap-3 rounded-lg p-2">
           <Avatar className="h-9 w-9">
-            <AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
-            <AvatarFallback>KK</AvatarFallback>
+            {image ? (<AvatarImage alt="Profile image" src={image} />):(<><AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
+            <AvatarFallback><User /></AvatarFallback></>)}
           </Avatar>
           <div className="flex flex-col leading-tight">
             <span className="text-sm font-medium">{name}</span>

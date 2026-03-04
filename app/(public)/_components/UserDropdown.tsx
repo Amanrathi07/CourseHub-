@@ -44,7 +44,7 @@ export function UserDropdown({user:{name,email,image}}:props) {
         >
           <Avatar className="h-8 w-8">
             {image ? (<AvatarImage alt="Profile image" src={image} />):(<><AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
-            <AvatarFallback><User /></AvatarFallback></>)}
+            <AvatarFallback>{name.split(' ').map(n=>(n[0].toUpperCase()))}</AvatarFallback></>)}
           </Avatar>
           <ChevronDownIcon
             aria-hidden="true"
@@ -63,7 +63,8 @@ export function UserDropdown({user:{name,email,image}}:props) {
         <div className="flex items-center gap-3 rounded-lg p-2">
           <Avatar className="h-9 w-9">
             {image ? (<AvatarImage alt="Profile image" src={image} />):(<><AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
-            <AvatarFallback><User /></AvatarFallback></>)}
+            <AvatarFallback>
+              {name.split(' ').map(n=>(n[0].toUpperCase()))}</AvatarFallback></>)}
           </Avatar>
           <div className="flex flex-col leading-tight">
             <span className="text-sm font-medium">{name}</span>

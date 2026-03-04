@@ -7,13 +7,9 @@ import {
   User,
   User2Icon,
   User2,
-} from "lucide-react"
+} from "lucide-react";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
   DropdownMenu,
@@ -23,28 +19,38 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Logout } from "@/modules/ui/Logout"
-import Link from "next/link"
+} from "@/components/ui/dropdown-menu";
+import { Logout } from "@/modules/ui/Logout";
+import Link from "next/link";
 
-interface props{
-  user:{
-    name:string ;
-    email:string ;
-    image:string ;
-  }
+interface props {
+  user: {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    email: string;
+    emailVerified: boolean;
+    name: string;
+    image?: string | null | undefined;
+  };
 }
 
-export function UserDropdown({user:{name,email,image}}:props) {
+export function UserDropdown({ user: { name, email, image } }: props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button
-          className="flex items-center gap-2 rounded-full px-2 py-1 transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        >
+        <button className="flex items-center gap-2 rounded-full px-2 py-1 transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           <Avatar className="h-8 w-8">
-            {image ? (<AvatarImage alt="Profile image" src={image} />):(<><AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
-            <AvatarFallback>{name.split(' ').map(n=>(n[0].toUpperCase()))}</AvatarFallback></>)}
+            {image ? (
+              <AvatarImage alt="Profile image" src={image} />
+            ) : (
+              <>
+                <AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
+                <AvatarFallback>
+                  {name.split(" ").map((n) => n[0].toUpperCase())}
+                </AvatarFallback>
+              </>
+            )}
           </Avatar>
           <ChevronDownIcon
             aria-hidden="true"
@@ -62,15 +68,20 @@ export function UserDropdown({user:{name,email,image}}:props) {
         {/* User Info Section */}
         <div className="flex items-center gap-3 rounded-lg p-2">
           <Avatar className="h-9 w-9">
-            {image ? (<AvatarImage alt="Profile image" src={image} />):(<><AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
-            <AvatarFallback>
-              {name.split(' ').map(n=>(n[0].toUpperCase()))}</AvatarFallback></>)}
+            {image ? (
+              <AvatarImage alt="Profile image" src={image} />
+            ) : (
+              <>
+                <AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
+                <AvatarFallback>
+                  {name.split(" ").map((n) => n[0].toUpperCase())}
+                </AvatarFallback>
+              </>
+            )}
           </Avatar>
           <div className="flex flex-col leading-tight">
             <span className="text-sm font-medium">{name}</span>
-            <span className="text-xs text-muted-foreground">
-              {email}
-            </span>
+            <span className="text-xs text-muted-foreground">{email}</span>
           </div>
         </div>
 
@@ -81,37 +92,44 @@ export function UserDropdown({user:{name,email,image}}:props) {
             My Account
           </DropdownMenuLabel>
 
-          <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-2 py-2 text-sm">
+          <DropdownMenuItem
+            asChild
+            className="cursor-pointer rounded-lg px-2 py-2 text-sm"
+          >
             <Link href="/">
               <Home className="mr-2 h-4 w-4" />
               Home
             </Link>
           </DropdownMenuItem>
 
-          <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-2 py-2 text-sm">
+          <DropdownMenuItem
+            asChild
+            className="cursor-pointer rounded-lg px-2 py-2 text-sm"
+          >
             <Link href="/courses">
               <BookOpenIcon className="mr-2 h-4 w-4" />
               Courses
             </Link>
           </DropdownMenuItem>
 
-          <DropdownMenuItem asChild className="cursor-pointer rounded-lg px-2 py-2 text-sm">
+          <DropdownMenuItem
+            asChild
+            className="cursor-pointer rounded-lg px-2 py-2 text-sm"
+          >
             <Link href="/dashboard">
               <LayoutDashboard className="mr-2 h-4 w-4" />
               Dashboard
             </Link>
           </DropdownMenuItem>
-
-
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem >
-          <LogOut className="mr-2 h-4 w-4"  />
-           <Logout />
+        <DropdownMenuItem>
+          <LogOut className="mr-2 h-4 w-4" />
+          <Logout />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

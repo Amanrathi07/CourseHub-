@@ -5,6 +5,7 @@ import globe from"@/public/globe.svg"
 import { getServerSession } from "@/lib/getServerSession.ts";
 import { buttonVariants } from "@/components/ui/button";
 import { UserDropdown } from "./UserDropdown";
+import { IconInnerShadowTop } from "@tabler/icons-react";
 
 interface navItemProps{
     name:string ;
@@ -24,7 +25,8 @@ export default async function NavBar() {
     <header  className="sticky  top-0 z-50 w-full border-b bg-background/95 backdrop-blur-[backdrop-filter]:bg-background/60">
         <div className="container flex min-h-16 items-center mx-auto px4 md:px-6 lg:px-8">
             <Link className="flex items-center space-x-2 mr-4" href="">
-                <Image src={globe} alt="Logo" className="size-9"/>
+                                <IconInnerShadowTop className="size-5!" />
+
                 <span className="font-bold">Course Hub</span>
             </Link>
 

@@ -54,7 +54,7 @@ export function NavUser() {
               <>
                 <AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
                 <AvatarFallback>
-                  {session?.user?.name.split(" ").map((n) => n[0].toUpperCase())}
+                  {session?.user?.email[0].toUpperCase()}
                 </AvatarFallback>
               </>
             )}
@@ -84,7 +84,7 @@ export function NavUser() {
                     <>
                       <AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
                       <AvatarFallback>
-                  {session?.user?.name.split(" ").map((n) => n[0].toUpperCase())}
+                  {session?.user?.email[0].toUpperCase()}
                 </AvatarFallback>
                     </>
                   )

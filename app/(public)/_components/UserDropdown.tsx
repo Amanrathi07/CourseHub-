@@ -47,7 +47,7 @@ export function UserDropdown({ user: { name, email, image } }: props) {
               <>
                 <AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
                 <AvatarFallback>
-                  {/* {name.split(" ").map((n) => n[0].toUpperCase())} */}
+                  {email[0].toUpperCase()}
                 </AvatarFallback>
               </>
             )}
@@ -74,7 +74,7 @@ export function UserDropdown({ user: { name, email, image } }: props) {
               <>
                 <AvatarImage alt="Profile image" src="/origin/avatar.jpg" />
                 <AvatarFallback>
-                  {/* {name.split(" ").map((n) => n[0].toUpperCase())} */}
+                 {email[0].toUpperCase()}
                 </AvatarFallback>
               </>
             )}

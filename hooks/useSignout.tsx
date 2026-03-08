@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 export default function useSignout() {
   const router = useRouter();
-    const handelSignout = async function logout() {
+    const handelSignout = async function () {
         await authClient.signOut({
           fetchOptions: {
             onSuccess: () => {

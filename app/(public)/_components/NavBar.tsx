@@ -1,7 +1,5 @@
 import { ModeToggle } from "@/components/ModeToggle";
-import Image from "next/image";
 import Link from "next/link";
-import globe from"@/public/globe.svg"
 import { getServerSession } from "@/lib/getServerSession.ts";
 import { buttonVariants } from "@/components/ui/button";
 import { UserDropdown } from "./UserDropdown";

@@ -34,7 +34,7 @@ export function NavUser() {
 
   const {data :session , isPending} = authClient.useSession() ;
   
-  if(isPending)null ;
+  if(isPending) null ;
   const { isMobile } = useSidebar()
 
 

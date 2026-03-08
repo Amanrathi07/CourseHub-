@@ -32,11 +32,15 @@ import {
 import { authClient } from "@/lib/auth-client"
 import Link from "next/link"
 import { HomeIcon, Tv2 } from "lucide-react"
+import useSignout from "@/hooks/useSignout"
+
 
 export function NavUser() {
+  
+  const handelSignout = useSignout() ;
 
   const {data :session , isPending} = authClient.useSession() ;
-  
+
   if(isPending) null ;
   const { isMobile } = useSidebar()
 
@@ -116,14 +120,14 @@ export function NavUser() {
                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-               <Link href="/dashboard">
+               <Link href="/courses">
                   <Tv2 />
                   Courses
                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handelSignout}>
               <IconLogout />
               Log out
             </DropdownMenuItem>

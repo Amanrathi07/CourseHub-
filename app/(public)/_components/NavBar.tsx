@@ -15,7 +15,7 @@ interface navItemProps{
 const navigationItems :navItemProps[] = [
     {name:"Home" , href:"/"},
     {name:"Courses" , href:"/courses"},
-    {name:"Dashboard" , href:"/dashboard"}
+    {name:"Dashboard" , href:"/admin"}
 ]
 
 export default async function NavBar() {

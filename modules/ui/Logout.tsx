@@ -1,30 +1,13 @@
 "use client";
-import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+import useSignout from "@/hooks/useSignout";
 
 export function Logout() {
-  const router = useRouter();
-  async function logout() {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          toast.success("Logout Successfull ");
-          router.push("/");
-          router.refresh();
-        },
-        onError: (error) => {
-          toast.error(error.error.message || "Internal Server Error");
-        },
-      },
-    });
-  }
-
+  const handelSignout = useSignout() ; 
   return (
     <div>
       <button
         className="cursor-pointer rounded-lg px-2 py-2 text-sm text-red-500 hover:text-red-500"
-        onClick={logout}
+        onClick={handelSignout}
        
       >
         logout

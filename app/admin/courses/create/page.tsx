@@ -1,4 +1,4 @@
-"use client" ;
+"use client";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -12,8 +12,17 @@ import { ArrowLeft, FormInput, SparkleIcon } from "lucide-react";
 import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+
+import slugify from "slugify";
 
 export default function page() {
   const form = useForm<courseSchemaType>({
@@ -33,7 +42,13 @@ export default function page() {
   });
 
   function onSubmit(data: courseSchemaType) {
-    console.log(data)
+    console.log(data);
+  }
+
+  function slugSlugfiy() {
+    const titleValue = form.getValues("title");
+    const slug = slugify(titleValue,'_');
+    form.setValue("slug", slug, { shouldValidate: true });
   }
 
   return (
@@ -61,46 +76,42 @@ export default function page() {
         </CardHeader>
 
         <CardContent>
-            <Form {...form}>
-                <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-                    <FormField 
-                      control={form.control}
-                      name="title"
-                      render={({field})=>(
-                        <FormItem>
-                            <FormLabel>
-                                Title
-                            </FormLabel>
-                            <FormControl>
-                                <Input type="text"  placeholder="Title" {...field}/>
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+          <Form {...form}>
+            <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Title</FormLabel>
+                    <FormControl>
+                      <Input type="text" placeholder="Title" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                    <div className="flex gap-4">
-                      <FormField 
-                        name="slug"
-                        control={form.control}
-                        render={({field})=>(
-                            <Input placeholder="slug" {...field}/>
-                        )}
-                      />
-                      <Button type="button" className="w-fit" onClick={()=>{const titleValue = form.getValues("title")
-
-                            
-                      }}>
-                        Generate Slug <SparkleIcon className="ml-1" size={16}/>
-                      </Button>
-                    </div>
-                </form>
-            </Form>
+              <div className="flex gap-4">
+                <FormField
+                  name="slug"
+                  control={form.control}
+                  render={({ field }) => (
+                    <Input placeholder="slug" {...field} />
+                  )}
+                />
+                <Button
+                  type="button"
+                  className="w-fit"
+                  onClick={() => slugSlugfiy()}
+                >
+                  Generate Slug <SparkleIcon className="ml-1" size={16} />
+                </Button>
+              </div>
+            </form>
+          </Form>
         </CardContent>
       </Card>
     </>
   );
 }
-
-
-

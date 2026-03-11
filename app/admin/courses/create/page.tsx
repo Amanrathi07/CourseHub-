@@ -47,6 +47,12 @@ export default function page() {
 
   function slugSlugfiy() {
     const titleValue = form.getValues("title");
+    if(!titleValue){
+        form.setError("slug",{
+            type:"manual",
+            message:"Title must not be empty"})
+            return ;
+    } 
     const slug = slugify(titleValue,'_');
     form.setValue("slug", slug, { shouldValidate: true });
   }
@@ -92,12 +98,18 @@ export default function page() {
                 )}
               />
 
-              <div className="flex gap-4">
+              <div className="flex gap-4 items-end">
                 <FormField
                   name="slug"
                   control={form.control}
                   render={({ field }) => (
-                    <Input placeholder="slug" {...field} />
+                    <FormItem className="w-full">
+                        <FormLabel>Slug</FormLabel>
+                        <FormControl >
+                            <Input  type="text" placeholder="slug" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                    </FormItem>
                   )}
                 />
                 <Button
@@ -107,7 +119,22 @@ export default function page() {
                 >
                   Generate Slug <SparkleIcon className="ml-1" size={16} />
                 </Button>
+                
               </div>
+
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Title</FormLabel>
+                    <FormControl>
+                      <Input type="text" placeholder="Title" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </form>
           </Form>
         </CardContent>

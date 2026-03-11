@@ -8,27 +8,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { courseSchema, courseSchemaType } from "@/lib/zodSchema";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, FormInput } from "lucide-react";
 import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
-
-
-import {
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-  FieldLegend,
-  FieldSeparator,
-  FieldSet,
-  FieldTitle,
-} from "@/components/ui/field"
 
 export default function page() {
   const form = useForm<courseSchemaType>({
@@ -78,27 +63,21 @@ export default function page() {
         <CardContent>
             <Form {...form}>
                 <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-                    <Controller
-              name="title"
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-title">
-                    Bug Title
-                  </FieldLabel>
-                  <Input
-                    {...field}
-                    id="form-rhf-demo-title"
-                    aria-invalid={fieldState.invalid}
-                    placeholder="Login button not working on mobile"
-                    autoComplete="off"
-                  />
-                  {fieldState.invalid && (
-                    <FieldError errors={[fieldState.error]} />
-                  )}
-                </Field>
-              )}
-            />
+                    <FormField 
+                      control={form.control}
+                      name="title"
+                      render={({field})=>(
+                        <FormItem>
+                            <FormLabel>
+                                Title
+                            </FormLabel>
+                            <FormControl>
+                                <Input type="text"  placeholder="Title" {...field}/>
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                 </form>
             </Form>
         </CardContent>
@@ -106,3 +85,6 @@ export default function page() {
     </>
   );
 }
+
+
+

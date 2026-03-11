@@ -1,5 +1,5 @@
 "use client" ;
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { courseSchema, courseSchemaType } from "@/lib/zodSchema";
-import { ArrowLeft, FormInput } from "lucide-react";
+import { ArrowLeft, FormInput, SparkleIcon } from "lucide-react";
 import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -78,6 +78,22 @@ export default function page() {
                         </FormItem>
                       )}
                     />
+
+                    <div className="flex gap-4">
+                      <FormField 
+                        name="slug"
+                        control={form.control}
+                        render={({field})=>(
+                            <Input placeholder="slug" {...field}/>
+                        )}
+                      />
+                      <Button type="button" className="w-fit" onClick={()=>{const titleValue = form.getValues("title")
+
+                            
+                      }}>
+                        Generate Slug <SparkleIcon className="ml-1" size={16}/>
+                      </Button>
+                    </div>
                 </form>
             </Form>
         </CardContent>

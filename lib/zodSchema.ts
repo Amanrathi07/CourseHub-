@@ -60,3 +60,6 @@ export const courseSchema = z.object({
     message: "Please select a course status.",
   }),
 });
+
+
+export type courseSchemaType = z.input<typeof courseSchema>

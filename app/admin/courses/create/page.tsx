@@ -107,7 +107,7 @@ export default function page() {
                     <FormItem className="w-full">
                         <FormLabel>Slug</FormLabel>
                         <FormControl >
-                            <Input  type="text" placeholder="slug" {...field} />
+                            <Input type="text" placeholder="slug" {...field} />
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -164,6 +164,22 @@ export default function page() {
                   </FormItem>
                 )}
               />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <FormControl>
+                      <Input  placeholder="Category" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              </div>
             </form>
           </Form>
         </CardContent>

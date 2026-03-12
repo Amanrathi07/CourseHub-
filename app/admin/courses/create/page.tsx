@@ -23,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import slugify from "slugify";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function page() {
   const form = useForm<courseSchemaType>({
@@ -124,12 +125,40 @@ export default function page() {
 
               <FormField
                 control={form.control}
-                name="title"
+                name="smallDescription"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel>Small Description</FormLabel>
                     <FormControl>
-                      <Input type="text" placeholder="Title" {...field} />
+                      <Textarea className="min-h-30" placeholder="Small Description" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Textarea className="min-h-30" placeholder="Description" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="fileKey"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Thumbnail Image</FormLabel>
+                    <FormControl>
+                      <Input  placeholder="thumbnail url" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
